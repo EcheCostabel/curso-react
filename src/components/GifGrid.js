@@ -12,11 +12,11 @@ export const GifGrid = ({category}) => {
             return {
                 id: img.id,
                 title: img.title,
-                url: img.downSized_medium.url
+                url: img.images?.downsized_medium.url
             }
         })
 
-        console.log(data)
+        console.log(gifs)
     }
     getGift()
 
