@@ -1,11 +1,11 @@
 
 import './App.css';
-import { GifExpertApp } from './components/GifExpertApp';
+import { HooksApp } from './HooksApp';
 
 function App() {
   return (
     <div className="App">
-      <GifExpertApp />
+      <HooksApp /> 
     </div>
   );
 }
