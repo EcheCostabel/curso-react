@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { GifGridItem } from './GifGridItem'
 import { getGifs } from '../helpers/getGifs'
 
@@ -10,8 +9,7 @@ export const GifGrid = ({category}) => {
     useEffect(() => {
         getGifs(category)
         .then(imgs => setimages(imgs))
-
-    }, [])
+    }, [category])
 
 
   return (
