@@ -1,32 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { GifGridItem } from './GifGridItem'
+import { getGifs } from '../helpers/getGifs'
 
 export const GifGrid = ({category}) => {
 
     const [images, setimages] = useState([])
 
     useEffect(() => {
-        getGift()
+        getGifs(category)
+        .then(imgs => setimages(imgs))
 
     }, [])
 
-    const getGift = async () => {
-        const url = `https://api.giphy.com/v1/gifs/search?q=${encodeURI(category)}&limit=10&api_key=76yeVqfKmzDKiuR5LLoshSQ0pYwqORR1`
-        const resp = await axios(url)
-        const {data} = await resp.data
-
-        const gifs = data.map(img => {
-            return {
-                id: img.id,
-                title: img.title,
-                url: img.images?.downsized_medium.url
-            }
-        })
-
-        console.log(gifs)
-        setimages(gifs)
-    }
 
   return (
     <>
