@@ -19,7 +19,16 @@ export const TodoApp = () => {
 
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos)) //localStorage solo guarda strings por eso tengo que pasarlo
-    },[todos])
+    },[todos]);
+
+    const handleDelete = (todoId) => {
+
+        const action = {
+            type: 'delete',
+            payload: todoId
+        }
+        dispatch(action)
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,7 +50,7 @@ export const TodoApp = () => {
 
         dispatch(action);
         reset();   //este reset lo saco de useForm, lo hice para limpiar el input una vez enviado. Buscar.
-    }
+    };
 
   return (
     <div>
@@ -56,7 +65,7 @@ export const TodoApp = () => {
                     todos.map( (todo, i) => (
                     <li key={todo.id} className='list-group-item d-flex align-items-center justify-content-between'>
                         <p className='text-center'>{i + 1} {todo.desc}</p>
-                        <button className='btn btn-danger'>Borrar</button>
+                        <button className='btn btn-danger' onClick={() => handleDelete(todo.id)}>Borrar</button>
                         </li>
                         ))
                     }
