@@ -1,24 +1,36 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { useForm } from '../../hooks/useForm';
 import './styles.css';
 import { todoReducer } from './todoReducer';
 
-const initialState = [{
-    id: new Date().getTime(),
-    desc: 'Aprender React',
-    done: false
-}]
+
+const init = () => {
+   return JSON.parse(localStorage.getItem('todos')) || [];
+}
 
 export const TodoApp = () => {
 
-    const [todos, dispatch] = useReducer(todoReducer, initialState);
-    console.log(todos)
+    const [todos, dispatch] = useReducer(todoReducer, [], init);
+
+    const  [ {description}, handleInputChange, reset ] = useForm({  //hago destructuring de description para no poner formValues.description pero es lo mismo
+        description:'',
+
+    });
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos)) //localStorage solo guarda strings por eso tengo que pasarlo
+    },[todos])
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (description.trim().length < 1) {
+            return;
+        }
         
         const newTodo = {
             id: new Date().getTime(),
-            desc: 'Nueva tarea',
+            desc: description,
             done: false
         }
 
@@ -26,8 +38,9 @@ export const TodoApp = () => {
             type:'add',
             payload: newTodo
         }
-        
-        dispatch(action)
+
+        dispatch(action);
+        reset();   //este reset lo saco de useForm, lo hice para limpiar el input una vez enviado. Buscar.
     }
 
   return (
@@ -57,9 +70,11 @@ export const TodoApp = () => {
         <form onSubmit={handleSubmit}>
             <input 
             type='text'
-            className='form-control'
             name='description'
+            className='form-control'
             placeholder='Aprender...'
+            value={description}
+            onChange={handleInputChange}
             />
             <button className='btn btn-outline-primary' type='submit'>
                     Agregar
