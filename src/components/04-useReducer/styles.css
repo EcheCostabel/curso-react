@@ -1,0 +1,12 @@
+
+body{
+    padding: 5rem;
+}
+
+p {
+    cursor: pointer;
+}
+
+.complete {
+    text-decoration: line-through;
+}
