@@ -10,8 +10,25 @@ const initialState = [{
 
 export const TodoApp = () => {
 
-    const [todos] = useReducer(todoReducer, initialState);
+    const [todos, dispatch] = useReducer(todoReducer, initialState);
     console.log(todos)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        const newTodo = {
+            id: new Date().getTime(),
+            desc: 'Nueva tarea',
+            done: false
+        }
+
+        const action = {
+            type:'add',
+            payload: newTodo
+        }
+        
+        dispatch(action)
+    }
 
   return (
     <div>
@@ -37,14 +54,14 @@ export const TodoApp = () => {
            <h4>Agregar Todo</h4>
            <hr />
 
-        <form>
+        <form onSubmit={handleSubmit}>
             <input 
             type='text'
             className='form-control'
             name='description'
             placeholder='Aprender...'
             />
-            <button className='btn btn-outline-primary'>
+            <button className='btn btn-outline-primary' type='submit'>
                     Agregar
             </button>
         </form>
