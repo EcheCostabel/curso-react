@@ -7,12 +7,13 @@ import './App.css';
 // // import { SimpleForm } from './components/02-useEffect/SimpleForm';
 // // import { HooksApp } from './HooksApp';
 // import './components/04-useReducer/intro-reducer'
-import { TodoApp } from './components/04-useReducer/TodoApp';
+// import { TodoApp } from './components/04-useReducer/TodoApp';
+import { MainApp } from './components/05-useContext/MainApp';
 
 function App() {
   return (
     <div className="App">
-      <TodoApp /> 
+      <MainApp /> 
     </div>
   );
 }
