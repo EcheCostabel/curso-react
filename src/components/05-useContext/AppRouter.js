@@ -7,16 +7,19 @@ import { NavBar } from './NavBar';
 
 export const AppRouter = () => {
   return (
-    
+
 <BrowserRouter>
         <div>
             <NavBar />
+            <div className='container'>
+
                 <Routes>
                     <Route path='/' element={<HomeScreen />} />
                     <Route path='/about' element={<AboutScreen />} />
                     <Route path='/login' element={<LoginScreen />} />
                     
                 </Routes>
+            </div>
         </div>
 </BrowserRouter>
 

@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppRouter } from './AppRouter';
 import { UserCotext } from './UserContext';
 
 export const MainApp = () => {
 
-  const user = {
-    id: 1234,
-    name: 'Exequiel',
-    email: 'exequielcostabel@gmail.com'
-  }
+ const [user, setUser] = useState({});
 
   return (
-    <UserCotext.Provider value={user}>
+    // con esto proveemos el valor de user a todo lo que se encuentra dentro del provider
+    <UserCotext.Provider value={{
+      user,
+      setUser,
+    }}> 
 
        <AppRouter />
 
